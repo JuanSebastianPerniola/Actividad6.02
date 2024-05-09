@@ -1,0 +1,24 @@
+<%- include ("header") %>
+    <form action="/crearProducto" method="post" class="container-sm mt-5">
+      <div class="mb-3">
+        <label for="id" class="form-label">id Productos</label>
+        <input type="text" class="form-control" name="id" id="id" required>
+        <div id="id" class="form-text">Insert a id product</div>
+      </div>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del producto</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" required>
+          <div id="nombre" class="form-text">Insert  a product name</div>
+        </div>
+        <div class="mb-3">
+            <label for="preu" class="form-label">Cost</label>
+            <input type="preu" class="form-control" name="product" id="product" required>
+            <div id="preu" class="form-text">Write the cost of the product</div>
+          </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+<%- include ("footer") %>

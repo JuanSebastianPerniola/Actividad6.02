@@ -1,5 +1,5 @@
 <%- include ("header") %>
-    <form action="/Usuarios" method="post" class="container-sm mt-5">
+    <form action="/persona" method="post" class="container-sm mt-5">
       <div class="mb-3">
         <label for="id" class="form-label">id</label>
         <input type="text" class="form-control" name="id" id="id">
@@ -16,9 +16,9 @@
             <div id="email" class="form-text">I don't need your goofy ahh email! Write a normal one!</div>
           </div>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1"  >
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" href="/persona">Submit</button>
       </form>
 <%- include ("footer") %>

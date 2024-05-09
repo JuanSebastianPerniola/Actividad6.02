@@ -1,5 +1,20 @@
 <%- include ("header") %>
-    <% Usuarios.forEach((Usuario, index)=>{ %>
-        <p><%= Usuario.Nombre %></p>
-    <% }) %>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-6">Nombre</th>
+                <th class="col-6">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% personas.forEach((persona, index) => { %>
+                <tr>
+                    <td class="col-6"><%= persona.Nombre %></td>
+                    <td class="col-6"><%= persona.Email %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
 <%- include ("footer") %>

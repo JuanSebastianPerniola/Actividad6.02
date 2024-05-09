@@ -1,0 +1,27 @@
+<%- include ("footer") %>
+
+
+    <%- include ("header") %>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-6">Nombre</th>
+                        <th class="col-6">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach((producto, index)=>{ %>
+                        <tr>
+                            <td class="col-6">
+                                <%= producto.Nombre %>
+                            </td>   
+                            <td class="col-6">
+                                <%= producto.Preu %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ("footer") %>
