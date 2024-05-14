@@ -1,0 +1,25 @@
+<%- include ("footer") %>
+    <%- include ("header") %>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-6">Usuario</th>
+                        <th class="col-6">Product</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% comandes.forEach((comanda, index)=>{ %>
+                        <tr>
+                            <td class="col-6">
+                                <%= comanda.Usuario_ID %>
+                            </td>   
+                            <td class="col-6">
+                                <%= comanda.product_ID %>
+                            </td>   
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ("footer") %>

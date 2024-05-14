@@ -47,6 +47,17 @@ app.post('/crearProducto', (req, res) => {
 }
 });
 
+
+// Rutas para Productos
+app.get('/showComanda', (req, res) => {
+  const rows = db.prepare('SELECT * FROM Comandes').all();
+  res.render('showComandas', { comandes: rows });
+});
+//
+app.get('/crearComanda', (req, res) => {
+  res.render("comanda");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}/persona`);
 });
