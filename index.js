@@ -39,23 +39,38 @@ app.get('/crearProducto', (req, res) => {
 
 app.post('/crearProducto', (req, res) => {
   try {
-  const statement = db.prepare('INSERT INTO product(id, nombre, preu) VALUES(?, ?, ?)');
-  const info = statement.run(req.body.id, req.body.nombre, req.body.preu);
-  res.redirect('/product');
-} catch (SqliteError) {
+    const statement = db.prepare('INSERT INTO product(id, nombre, preu) VALUES(?, ?, ?)');
+    const info = statement.run(req.body.id, req.body.nombre, req.body.preu);
+    res.redirect('/product');
+  } catch (SqliteError) {
 
-}
+  }
 });
 
 
-// Rutas para Productos
-app.get('/showComanda', (req, res) => {
-  const rows = db.prepare('SELECT * FROM Comandes').all();
+// Rutas para Comandas
+app.get('/comandes', (req, res) => {
+  const rowsProduct = db.prepare('SELECT * FROM Product').all();
+  const rowsPersona = db.prepare('SELECT * FROM Usuario').all();
+  res.render('comandes', { personas: rowsPersona, productos: rowsProduct });
+});
+
+app.post('/comandes', (req, res) => {
+  try {
+  const statement = db.prepare('INSERT INTO Comandes(Usuario_ID, product_ID) VALUES(?, ?)');
+  const info = statement.run(req.body.Usuario_ID, req.body.product_ID);
+  console.log(req.body);
+  console.log(info);
+  res.redirect('/comandes');
+  } catch (SqliteError) {
+    console.log(SqliteError);
+  }
+});
+
+
+app.get('/showComandas', (req, res) => {
+  const rows = db.prepare('SELECT Usuario.nombre as UsuarioNombre, Usuario.email, product.nombre as ProductName, product.preu FROM Comandes JOIN Usuario ON Comandes.Usuario_ID = usuario.id JOIN product on product.id = Comandes.product_ID').all();
   res.render('showComandas', { comandes: rows });
-});
-//
-app.get('/crearComanda', (req, res) => {
-  res.render("comanda");
 });
 
 app.listen(port, () => {

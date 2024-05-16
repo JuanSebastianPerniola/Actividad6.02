@@ -12,10 +12,16 @@
                     <% comandes.forEach((comanda, index)=>{ %>
                         <tr>
                             <td class="col-6">
-                                <%= comanda.Usuario_ID %>
+                                <%= comanda.UsuarioNombre %>
                             </td>   
                             <td class="col-6">
-                                <%= comanda.product_ID %>
+                                <%= comanda.email %>
+                            </td>   
+                            <td class="col-6">
+                                <%= comanda.ProductName %>
+                            </td>   
+                            <td class="col-6">
+                                <%= comanda.precio %>
                             </td>   
                         </tr>
                         <% }) %>

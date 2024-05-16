@@ -1,0 +1,19 @@
+<%- include("header") %>
+<form action="/comandes" method="post">
+    <select name="Usuario_ID" id="Usuario_ID">
+        <% personas.forEach((personas, index) => { %>
+            <option value="<%= personas.id %>">
+                <%= personas.Nombre %>
+            </option>
+        <% }) %>
+    </select>
+    <select name="product_ID" id="product_ID">
+        <% productos.forEach((producto, index) => { %>
+            <option value="<%= producto.id %>">
+                <%= producto.Nombre %>
+            </option>
+        <% }) %>
+    </select>
+    <button type="submit">Envíalo pana</button>
+</form>
+<%- include("footer") %>
