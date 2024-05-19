@@ -1,15 +1,17 @@
 <%- include("header") %>
 <form action="/comandes" method="post">
+    <label for="usuario">Nombre de usuario</label>
     <select name="Usuario_ID" id="Usuario_ID">
-        <% personas.forEach((personas, index) => { %>
-            <option value="<%= personas.id %>">
-                <%= personas.Nombre %>
+        <% personas.forEach((persona) => { %>
+            <option value="<%- persona.id %>">
+                <%= persona.Nombre %>
             </option>
         <% }) %>
     </select>
+    <label for="Producto">Producto</label>
     <select name="product_ID" id="product_ID">
-        <% productos.forEach((producto, index) => { %>
-            <option value="<%= producto.id %>">
+        <% productos.forEach((producto) => { %>
+            <option value="<%- producto.id %>">
                 <%= producto.Nombre %>
             </option>
         <% }) %>
