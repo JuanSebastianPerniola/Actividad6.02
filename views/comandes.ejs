@@ -1,21 +1,21 @@
 <%- include("header") %>
-<form action="/comandes" method="post">
-    <label for="usuario">Nombre de usuario</label>
-    <select name="Usuario_ID" id="Usuario_ID">
-        <% personas.forEach((persona) => { %>
-            <option value="<%- persona.id %>">
-                <%= persona.Nombre %>
-            </option>
-        <% }) %>
-    </select>
-    <label for="Producto">Producto</label>
-    <select name="product_ID" id="product_ID">
-        <% productos.forEach((producto) => { %>
-            <option value="<%- producto.id %>">
-                <%= producto.Nombre %>
-            </option>
-        <% }) %>
-    </select>
-    <button type="submit">Envíalo pana</button>
-</form>
-<%- include("footer") %>
+    <form action="/comandes" method="post">
+        <p class="display-6">Personas</p>
+        <select class="form-select" name="Usuario_ID">
+            <% personas.forEach((persona, index)=> { %>
+                <option value="<%= persona.ID %>">
+                    <%= persona.Nombre %>
+                </option>
+                <% }) %>
+        </select>
+        <p class="display-6">Productos</p>
+        <select class="form-select" name="Product_ID">
+            <% productos.forEach((producto, index)=> { %>
+                <option value="<%= producto.ID %>">
+                    <%= producto.Nombre %>
+                </option>
+                <% }) %>
+        </select>
+        <button type="button" class="btn btn-dark" href="/showComandes">Envíalo pana</button>
+    </form>
+    <%- include("footer")%>

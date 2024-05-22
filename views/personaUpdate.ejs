@@ -1,0 +1,19 @@
+<%- include ("header") %>
+        <form action="/personaUpdate" method="post" class="container-sm mt-5">
+            <div class="mb-3" hidden aria-label="">
+                <label for="id" class="form-label">id</label>
+                <input type="text" class="form-control" name="ID" required hidden value="<%= persona.ID %>">
+            </div> 
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="<%=persona.Nombre %>">
+                <div id="nombre" class="form-text">Write a new name</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="<%=persona.Email %>">
+                <div id="email" class="form-text">Write a new email</div>
+            </div>
+                <button type="submit" clbuttonss="btn btn-primary" href="showPersonas">Submit</a>
+        </form>
+        <%- include ("footer") %>

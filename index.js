@@ -26,8 +26,6 @@ app.post('/persona', (req, res) => {
   } catch (SqliteError) {
   }
 });
-
-
 // Rutas para Productos
 app.get('/showProduct', (req, res) => {
   const rows = db.prepare('SELECT * FROM Product').all();
@@ -52,9 +50,10 @@ app.post('/crearProducto', (req, res) => {
 
 
 app.get('/showComandas', (req, res) => {
-  const rows = db.prepare('SELECT Usuario.nombre as UsuarioNombre, Usuario.email, product.nombre as ProductName, product.preu FROM Comandes JOIN Usuario ON Comandes.Usuario_ID = usuario.id JOIN product on product.id = Comandes.product_ID').all();
-  res.render('showComandas', { comandes: rows });
+  const rows = db.prepare('SELECT Comandes.ID , Usuario.Nombre as UsuarioNombre, Usuario.email, Product.nombre as ProductName, Product.preu FROM Comandes JOIN Usuario ON Comandes.Usuario_ID = Usuario.ID JOIN Product on Product.ID = Comandes.Product_ID').all();
+  res.render('showComandas', { comandas: rows });
 });
+
 
 // Rutas para Comandas
 app.get('/comandes', (req, res) => {
@@ -65,19 +64,89 @@ app.get('/comandes', (req, res) => {
 
 
 app.post('/comandes', (req, res) => {
-  try {
+  if (!req.body.Usuario_ID || !req.body.product_ID) {
     console.log(req.body);
     const statement = db.prepare('INSERT INTO Comandes(Usuario_ID, Product_ID) VALUES(?, ?)');
-    const info = statement.run(req.body.Usuario_ID, req.body.product_ID);
+    const info = statement.run(req.body.Usuario_ID, req.body.Product_ID);
     console.log(info);
+    res.redirect('/comandes');
+  } else {
     res.redirect('/showComandas');
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Error inserting data into Comandes table");
+  }
+});
+
+//Rutas para changed persona
+app.get('/personaUpdate', (req, res) => {
+  console.log(req.query);
+  laquequieras = req.query.ID;
+  console.log(laquequieras);
+  const statement = db.prepare('SELECT * FROM Usuario WHERE ID = ?').get(laquequieras);
+  console.log(statement);
+  res.render('personaUpdate', { persona: statement });
+});
+
+app.post('/personaUpdate', (req, res) => {
+  try {
+    console.log(req.body);
+    const statement = db.prepare('UPDATE Usuario SET Nombre = ? , Email = ? WHERE ID = ?');
+    const info = statement.run(req.body.nombre, req.body.email, req.body.ID);
+    res.redirect('/showPersonas');
+  } catch (SqliteError) {
   }
 });
 
 
+//Rutas para changed product
+app.get('/productUpdate', (req, res) => {
+  console.log(req.query);
+  laquequieras = req.query.ID;
+  console.log(laquequieras);
+  const statement = db.prepare('SELECT * FROM Product WHERE ID = ?').get(laquequieras);
+  console.log(statement);
+  res.render('productUpdate', { product: statement });
+});
+
+app.post('/productUpdate', (req, res) => {
+  try {
+    console.log(req.body);
+    const statement = db.prepare('UPDATE Product SET Nombre = ? , Preu = ? WHERE ID = ?');
+    const info = statement.run(req.body.Nombre, req.body.Preu, req.body.ID);
+    res.redirect("/showProduct");
+    console.log(statement);
+  } catch (SqliteError) {
+  }
+});
+
+app.get('/comandesUpdate', (req, res) => {
+  console.log(req.query);
+  const laquequieras = req.query.ID;
+  console.log("ID proporcionado:", laquequieras); // Verifica el ID proporcionado
+  const comandes = db.prepare('SELECT Comandes.ID, Usuario.Nombre As UsuarioNom, Product.Nombre as ProductNom FROM Comandes JOIN Usuario ON Comandes.Usuario_ID = Usuario.ID JOIN Product ON Comandes.Product_ID = Product.ID WHERE Comandes.ID = ?').get(laquequieras);
+  // const comandes = statement;
+  console.log("Resultado de la consulta:", comandes); // Verifica el resultado de la consulta
+  if (comandes) {
+    const rowsProduct = db.prepare('SELECT * FROM Product').all();
+    const rowsPersona = db.prepare('SELECT * FROM Usuario').all();
+    
+    res.render('comandesUpdate', { comanda: comandes, personas: rowsPersona, productos: rowsProduct });
+  } else {
+    res.send('No se encontró ninguna comanda con el ID proporcionado.');
+  }
+});
+
+
+
+app.post('/comandesUpdate', (req, res) => {
+  try {
+    console.log(req.body);
+    const statement = db.prepare('UPDATE Comandes SET Usuario_ID = ? , Product_ID = ? WHERE id = ?');
+    const info = statement.run(req.body.Usuario_ID, req.body.Product_ID, req.body.ID); // Cambia req.body.id a req.body.ID
+    res.redirect("/showComandas");
+    console.log(statement);
+  } catch (SqliteError) {
+    // Manejar errores
+  }
+});
 
 
 app.listen(port, () => {

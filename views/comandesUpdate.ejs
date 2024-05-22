@@ -1,0 +1,23 @@
+<%- include("header") %>
+<form action="/comandesUpdate" method="post">
+    <h1>Comanda update</h1>
+    <input type="hidden" name="ID" value="<%= comanda.ID %>"> <!-- Añade este campo para enviar la ID de la comanda -->
+    <p class="display-6">Personas</p>
+    <select class="form-select" name="Usuario_ID">
+        <% personas.forEach((persona) => { %>
+            <option value="<%= persona.ID %>">
+                <%= persona.Nombre %>
+            </option>
+        <% }) %>
+    </select>
+    <p class="display-6">Productos</p>
+    <select class="form-select" name="Product_ID">
+        <% productos.forEach((producto) => { %>
+            <option value="<%= producto.ID %>">
+                <%= producto.Nombre %>
+            </option>
+        <% }) %>
+    </select>
+    <button type="submit" class="btn btn-dark">Envíalo pana</button>
+</form>
+<%- include("footer") %>

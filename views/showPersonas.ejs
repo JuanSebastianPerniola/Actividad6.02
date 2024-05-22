@@ -1,20 +1,27 @@
 <%- include ("header") %>
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="col-6">Nombre</th>
-                <th class="col-6">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% personas.forEach((persona, index) => { %>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td class="col-6"><%= persona.Nombre %></td>
-                    <td class="col-6"><%= persona.Email %></td>
+                    <th class="col-6">Nombre</th>
+                    <th class="col-6">Email</th>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
-</div>
-<%- include ("footer") %>
+            </thead>
+            <tbody>
+                <% personas.forEach((persona, index)=> { %>
+                    <tr>
+                        <td class="col-6">
+                            <%= persona.Nombre %>
+                        </td>
+                        <td class="col-6">
+                            <%= persona.Email %>
+                        </td>
+                        <td>
+                            <a href="/personaUpdate?ID=<%= persona.ID %>">update Persona</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include ("footer") %>
